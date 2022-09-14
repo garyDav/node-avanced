@@ -7,7 +7,7 @@ async function run() {
     database: process.env.DB_NAME || "db_donbosco",
     username: process.env.DB_USER || "dbuser",
     password: process.env.DB_PASSWORD || "dbpass",
-    host: process.env.DB_HOST || "172.21.0.2",
+    host: process.env.DB_HOST || "localhost",
     dialect: "postgres",
   };
 
