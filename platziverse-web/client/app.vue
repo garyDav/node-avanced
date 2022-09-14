@@ -1,5 +1,13 @@
 <template>
   <div>
+    <header class="header">
+      <div class="header-container">
+        <img src="/images/banner.png" width="485" alt="Donbosco-Banner">
+      </div>
+      <h3 class="btnOut">
+        <a class="button btnColor" href="/">Sign out</a>
+      </h3>
+    </header>
     <agent
       v-for="agent in agents"
       :uuid="agent.uuid"
@@ -15,6 +23,28 @@
     font-family: Arial;
     background: #f8f8f8;
     margin: 0;
+  }
+  .header {
+    background: white;
+    height: 200px;
+    display: flex;
+    align-items: center;
+  }
+  .header-container {
+    max-width: 850px;
+    margin: 0 auto;
+    flex: 1;
+    padding: 0 15px;
+    text-align: center;
+  }
+  .btnOut {
+    position: absolute;
+    right: 15px;
+  }
+  @media screen and (min-width: 850px) {
+    .header-container {
+      padding: 0;
+    }
   }
 </style>
 
