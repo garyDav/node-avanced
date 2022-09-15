@@ -6,6 +6,7 @@ const path = require("path");
 const express = require("express");
 const socketio = require("socket.io");
 const chalk = require("chalk");
+const cors = require("cors");
 const PlatziverseAgent = require("platziverse-agent");
 
 const { pipe } = require("./util");
@@ -16,6 +17,33 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 const agent = new PlatziverseAgent();
+
+// Security
+const whitelist = ['http://192.168.1.200:8080', 'http://192.168.1.200:3000', 'http://192.168.1.200:8000', 'http://192.168.1.200:1883']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('no permitido'))
+    }
+  },
+}
+app.use(cors(options))
+if (true) {
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Request-With, Content-Type, Accept'
+    )
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'POST, PUT, GET, PATCH, DELETE, OPTIONS'
+    )
+    next()
+  })
+}
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", proxy);

@@ -15,17 +15,17 @@ async function run() {
 
   const agent = await Agent.createOrUpdate({
     uuid: "yyy",
-    name: "test",
-    username: "test",
-    hostname: "test",
-    pid: 1,
+    name: "Arduino UNO",
+    username: "admin",
+    hostname: "localhost",
+    pid: 1001,
     connected: true,
   }).catch(handleFatalError);
 
   console.log("--agent--");
   console.log(agent);
 
-  const agents = await Agent.findAll().catch(handleFatalError);
+/*  const agents = await Agent.findAll().catch(handleFatalError);
 
   console.log("--agents--");
   console.log(agents);
@@ -49,7 +49,7 @@ async function run() {
     agent.uuid
   ).catch(handleFatalError);
   console.log("--Type-metrics--");
-  console.log(metricsType);
+  console.log(metricsType);*/
 }
 
 function handleFatalError(err) {

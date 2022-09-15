@@ -57,7 +57,7 @@ module.exports = {
 
       let result
       try {
-        result = await axios.get(`http://localhost:8080/metrics/${uuid}/${type}`).then(res => res.data)
+        result = await axios.get(`http://192.168.1.200:8080/metrics/${uuid}/${type}`).then(res => res.data)
       } catch (e) {
         this.error = e.error.error
         return

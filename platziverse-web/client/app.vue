@@ -70,7 +70,7 @@ module.exports = {
     async initialize () {
       let result
       try {
-        result = await axios.get(`http://localhost:8080/agents`).then(res => res.data)
+        result = await axios.get(`http://192.168.1.200:8080/agents`).then(res => res.data)
       } catch (error) {
         this.error = error.error
         return

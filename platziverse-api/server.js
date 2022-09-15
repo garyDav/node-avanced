@@ -4,12 +4,40 @@ const debug = require("debug")("platziverse:api");
 const chalk = require("chalk");
 const http = require("http");
 const express = require("express");
+const cors = require("cors");
 
 const api = require("./api");
 
 const port = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
+
+// Security
+const whitelist = ['http://192.168.1.200:8080', 'http://192.168.1.200:3000', 'http://192.168.1.200:8000', 'http://192.168.1.200:1883']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('no permitido'))
+    }
+  },
+}
+app.use(cors(options))
+if (true) {
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Request-With, Content-Type, Accept'
+    )
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'POST, PUT, GET, PATCH, DELETE, OPTIONS'
+    )
+    next()
+  })
+}
 
 app.use("/api", api);
 
