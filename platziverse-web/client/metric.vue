@@ -28,6 +28,7 @@ const axios = require('axios')
 const moment = require('moment')
 const randomColor = require('random-material-color')
 const LineChart = require('./line-chart')
+const { serverHost } = require('../config')
 
 module.exports = {
   name: 'metric',
@@ -57,7 +58,7 @@ module.exports = {
 
       let result
       try {
-        result = await axios.get(`http://192.168.1.200:8080/metrics/${uuid}/${type}`).then(res => res.data)
+        result = await axios.get(`${serverHost}/metrics/${uuid}/${type}`).then(res => res.data)
       } catch (e) {
         this.error = e.error.error
         return
