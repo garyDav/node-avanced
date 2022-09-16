@@ -12,7 +12,7 @@
       <div class="center">
         <h4>Activar Motor</h4>
         <label class="switch">
-          <input type="checkbox" class="scheckbox" />
+          <input type="checkbox" v-model="btnCheck" v-on:change="check" true-value="enabled" false-value="disabled" class="scheckbox" />
           <div class=""></div>
         </label>
       </div>
@@ -137,20 +137,32 @@
 <script>
 const axios = require('axios')
 const io = require('socket.io-client')
+/*const Vue = require("vue")
+const VueMqtt = require("vue-mqtt")*/
 const socket = io()
 const { serverHost } = require('../config')
+
+/*Vue.use(VueMqtt, "mqtt://localhost:1883", {
+  clientId: "WebClient-" + parseInt(Math.random() * 100000),
+});*/
 
 module.exports = {
   data () {
     return {
       agents: [],
       error: null,
+      btnCheck: 'disabled',
       socket
     }
   },
 
   mounted () {
     this.initialize()
+    //console.log(this.$mqtt)
+    /*this.$mqtt.subscribe('agent/message')
+    this.$mqtt.subscribe('agent/connected')
+    this.$mqtt.subscribe('agent/disconnected')
+    this.$mqtt.publish('agent/disconnected', 'JODER')*/
   },
 
   methods: {
@@ -173,6 +185,16 @@ module.exports = {
           this.agents.push(payload.agent)
         }
       })
+    },
+
+    async check() {
+      let result
+      try {
+        result = await axios.get(`${serverHost}/publish/${this.btnCheck}`)//.then(res => res.data)
+      } catch (error) {
+        this.error = error.error
+        return
+      }
     }
   }
 }

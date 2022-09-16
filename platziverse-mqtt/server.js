@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = require("debug")("platziverse:mqtt");
+const debug = require("debug")("donbosco:mqtt");
 const chalk = require("chalk");
 const mqemitter = require("mqemitter-redis");
 const redisPersistence = require("aedes-persistence-redis");
@@ -89,6 +89,9 @@ function startAedes() {
         debug(`Payload: ${packet.payload}`);
         break;
       case "agent/disconnected":
+        debug(`Payload: ${packet.payload}`);
+        break;
+      case "agent/actuador":
         debug(`Payload: ${packet.payload}`);
         break;
       case "agent/message":

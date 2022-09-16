@@ -35,10 +35,10 @@ const router = new VueRouter({
 
 // eslint-disable-next-line no-unused-vars
 const vm = new Vue({
-  //render: (h) => h(Base),
   router,
   el: "#app",
-  render(createElement) {
+  render: (h) => h(Base),
+  /*render(createElement) {
     return createElement(Base);
-  },
+  },*/
 }).$mount("#app");

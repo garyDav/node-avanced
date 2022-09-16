@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = require("debug")("platziverse:web");
+const debug = require("debug")("donbosco:web");
 const http = require("http");
 const path = require("path");
 const express = require("express");
@@ -19,30 +19,35 @@ const io = socketio(server);
 const agent = new PlatziverseAgent();
 
 // Security
-const whitelist = ['http://192.168.1.200:8080', 'http://192.168.1.200:3000', 'http://192.168.1.200:8000', 'http://192.168.1.200:1883']
+const whitelist = [
+  "http://192.168.1.200:8080",
+  "http://192.168.1.200:3000",
+  "http://192.168.1.200:8000",
+  "http://192.168.1.200:1883",
+];
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(new Error('no permitido'))
+      callback(new Error("no permitido"));
     }
   },
-}
-app.use(cors(options))
+};
+app.use(cors(options));
 if (true) {
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Request-With, Content-Type, Accept'
-    )
+      "Access-Control-Allow-Headers",
+      "Origin, X-Request-With, Content-Type, Accept"
+    );
     res.setHeader(
-      'Access-Control-Allow-Methods',
-      'POST, PUT, GET, PATCH, DELETE, OPTIONS'
-    )
-    next()
-  })
+      "Access-Control-Allow-Methods",
+      "POST, PUT, GET, PATCH, DELETE, OPTIONS"
+    );
+    next();
+  });
 }
 
 app.use(express.static(path.join(__dirname, "public")));
