@@ -20,10 +20,10 @@ const agent = new PlatziverseAgent();
 
 // Security
 const whitelist = [
-  "http://192.168.1.200:8080",
-  "http://192.168.1.200:3000",
-  "http://192.168.1.200:8000",
-  "http://192.168.1.200:1883",
+  "http://192.168.0.150:8080",
+  "http://192.168.0.150:3000",
+  "http://192.168.0.150:8000",
+  "http://192.168.0.150:1883",
 ];
 const options = {
   origin: (origin, callback) => {

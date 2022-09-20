@@ -1,5 +1,7 @@
 "use strict";
 
+require("dotenv").config();
+
 module.exports = {
   endpoint: process.env.API_ENDPOINT || "http://localhost:3000",
   serverHost: process.env.SERVER_HOST || "http://localhost:8080",
