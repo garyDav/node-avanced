@@ -203,7 +203,6 @@ module.exports = {
         showConfirmButton: false,
         timer: 900
       })
-      console.log('JODER')
       this.$router.push("/app");
     }
   }
