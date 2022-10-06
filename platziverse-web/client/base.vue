@@ -28,7 +28,11 @@ module.exports = {
 
   methods: {
     async initialize () {
-      this.$router.push("/login");
+      const login = localStorage.getItem('isLogin');
+      if (!login)
+        this.$router.push("/login");
+
+      this.$router.push("/app");
     },
   }
 }

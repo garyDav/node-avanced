@@ -5,7 +5,7 @@
         <img src="/images/banner.png" width="485" alt="Donbosco-Banner">
       </div>
       <h3 class="btnOut">
-        <a class="button btnColor" href="/">Sign out</a>
+        <a class="button btnColor" v-on:click="signOut">Sign out</a>
       </h3>
     </header>
     <section>
@@ -168,6 +168,11 @@ module.exports = {
   methods: {
     async initialize () {
       let result
+      const login = localStorage.getItem('isLogin');
+
+      if (!login)
+        this.$router.push("/login");
+
       try {
         result = await axios.get(`${serverHost}/agents`).then(res => res.data)
       } catch (error) {
@@ -195,6 +200,11 @@ module.exports = {
         this.error = error.error
         return
       }
+    },
+
+    async signOut() {
+      localStorage.removeItem('isLogin');
+      this.$router.push("/login");
     }
   }
 }

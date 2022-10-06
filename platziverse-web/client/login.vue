@@ -187,6 +187,7 @@ module.exports = {
     async submit() {
       const { email, password } = this.form
       if (email !== 'admin@gmail.com' || password !== 'admin') {
+        localStorage.removeItem('isLogin')
         Swal.fire({
           icon: 'error',
           title: 'Credenciales incorrectas',
@@ -194,6 +195,7 @@ module.exports = {
         return;
       }
 
+      localStorage.setItem('isLogin', 'true')
       Swal.fire({
         position: 'top',
         icon: 'success',
@@ -201,6 +203,7 @@ module.exports = {
         showConfirmButton: false,
         timer: 900
       })
+      console.log('JODER')
       this.$router.push("/app");
     }
   }

@@ -1,6 +1,12 @@
 # Node-avanced
 
 `sudo systemctl stop mosquitto`
+`docker-compose up -d`
+
+En api, mqtt y web: `npm run start-dev`
+
+`ps aux | grep "mosquitto"`
+`kill -9 #`
 
 `[api, mqtt, web]: npm run start-dev`
 
